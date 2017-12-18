@@ -43,6 +43,8 @@ type
 var
   Form1: TForm1;
   date: string;
+  year: string;
+  mounth: string;
   users: array of string;
   ammount: array of string;
   lenght: Integer;
@@ -90,7 +92,7 @@ var
  // JSONobj: TJSONObject;
   JSONValue: TJSONValue;
 begin
-  date:= '12.2017';
+  date:= FormatDateTime('mm.yyyy',Now);
   str:= IdHTTP1.Get('https://logicworld.ru/launcher/tableTopVote.php?mode=api&date='+ date);
   //Delete(str,1,62);    Fixed by Yaroslavik
   str:= '{"items": '+ str +'}';
