@@ -4,7 +4,7 @@ object Form1: TForm1
   BorderStyle = bsSingle
   Caption = 'LogicAPI'
   ClientHeight = 519
-  ClientWidth = 343
+  ClientWidth = 349
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -3882,17 +3882,16 @@ object Form1: TForm1
   object StringGrid1: TStringGrid
     Left = 0
     Top = 23
-    Width = 391
+    Width = 393
     Height = 497
     BevelInner = bvNone
     BiDiMode = bdLeftToRight
     BorderStyle = bsNone
     Color = clWhite
     ColCount = 2
-    DefaultColWidth = 170
+    DefaultColWidth = 172
     DrawingStyle = gdsClassic
     FixedCols = 0
-    FixedRows = 0
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -3903,9 +3902,6 @@ object Form1: TForm1
     ParentFont = False
     ScrollBars = ssVertical
     TabOrder = 1
-    ColWidths = (
-      170
-      170)
     RowHeights = (
       24
       24
@@ -3916,7 +3912,7 @@ object Form1: TForm1
   object ButtonSettings: TButton
     Left = 0
     Top = 0
-    Width = 345
+    Width = 343
     Height = 25
     Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
     TabOrder = 2

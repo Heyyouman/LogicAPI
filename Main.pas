@@ -69,8 +69,8 @@ end;
 
 procedure TForm1.FormResize(Sender: TObject);
 begin
-  //Form1.Width:=349;
-  //Form1.Height:=548;
+  Form1.Width:=355;
+  Form1.Height:=548;
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
