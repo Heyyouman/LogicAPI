@@ -3881,13 +3881,13 @@ object Form1: TForm1
   end
   object StringGrid1: TStringGrid
     Left = 0
-    Top = 24
+    Top = 23
     Width = 391
     Height = 497
     BevelInner = bvNone
     BiDiMode = bdLeftToRight
     BorderStyle = bsNone
-    Color = clBtnFace
+    Color = clWhite
     ColCount = 2
     DefaultColWidth = 170
     DrawingStyle = gdsClassic

@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, IdIOHandler,
   IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, System.JSON, Vcl.ExtCtrls,
-  Vcl.Buttons, Vcl.Grids, MMSystem, MyThread, Settings;
+  Vcl.Buttons, Vcl.Grids, MMSystem, MyThread, Settings, inifiles;
 
 //const  WM_AFTER_SHOW = WM_USER + 301;
 
@@ -42,13 +42,14 @@ type
 
 var
   Form1: TForm1;
-
   date: string;
   users: array of string;
   ammount: array of string;
   lenght: Integer;
   ammountSum: Integer;
   ammountSum_old: Integer;
+  UpdateRangeMSec: Integer;
+  ini: TIniFile;
 
 implementation
 
@@ -61,7 +62,6 @@ begin
   SetGrid;
 end;
 
-
 procedure TForm1.ButtonSettingsClick(Sender: TObject);
 begin
   FormSettings.ShowModal;
@@ -69,18 +69,17 @@ end;
 
 procedure TForm1.FormResize(Sender: TObject);
 begin
-  Form1.Width:=349;
-  Form1.Height:=548;
-
-
-
+  //Form1.Width:=349;
+  //Form1.Height:=548;
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
 begin
   //UpdateAmmount;
+  ini:= TIniFile.Create(ExtractFilePath(Application.ExeName)+'settings.ini');
+  UpdateRangeMSec:= ini.ReadInteger('Update','RangeMSec',30000);
   CheckUpdate:= Thread.Create(False);
-  CheckUpdate.FreeOnTerminate:= False;
+  CheckUpdate.FreeOnTerminate:= True;
   CheckUpdate.Priority:= tpNormal;
 end;
 
