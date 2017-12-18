@@ -39,11 +39,14 @@ begin
 end;
 
 procedure Thread.Execute;
+var i: Integer;
 begin
   Synchronize(Update);
   Synchronize(Upd_ammount_old);
   repeat
-    Sleep(30000);
+    //i:=i+1;                                         //Отладка
+    //Form1.Label1.Caption:= IntToStr(i);             //Отладка
+    Sleep(Main.UpdateRangeMSec);
     Synchronize(Update);
     if Main.ammountSum > Main.ammountSum_old then begin
       PlaySound('assets/synth.wav',0,SND_ASYNC);
