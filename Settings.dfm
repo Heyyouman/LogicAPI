@@ -4,7 +4,7 @@ object FormSettings: TFormSettings
   BorderStyle = bsSingle
   Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
   ClientHeight = 113
-  ClientWidth = 310
+  ClientWidth = 309
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -50,12 +50,21 @@ object FormSettings: TFormSettings
     OnClick = ButtonConfirmClick
   end
   object ButtonOk: TButton
-    Left = 206
+    Left = 212
     Top = 78
     Width = 75
     Height = 25
     Caption = #1054#1082
     TabOrder = 2
     OnClick = ButtonOkClick
+  end
+  object ButtonExit: TButton
+    Left = 120
+    Top = 78
+    Width = 75
+    Height = 25
+    Caption = #1042#1099#1081#1090#1080
+    TabOrder = 3
+    OnClick = ButtonExitClick
   end
 end

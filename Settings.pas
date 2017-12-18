@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, inifiles;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, inifiles,
+  MyThread;
 
 type
   TFormSettings = class(TForm)
@@ -13,14 +14,16 @@ type
     ButtonConfirm: TButton;
     ButtonOk: TButton;
     LabelSeconds: TLabel;
+    ButtonExit: TButton;
     procedure ButtonOkClick(Sender: TObject);
     procedure EditUpdRangeChange(Sender: TObject);
     procedure ButtonConfirmClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ButtonExitClick(Sender: TObject);
+    procedure ReloadUpdator;
   private
     { Private declarations }
   public
-    { Public declarations }
   end;
 
 var
@@ -33,18 +36,33 @@ implementation
 
 {$R *.dfm}
 
+uses Main;
+
+procedure TFormSettings.ReloadUpdator;
+begin
+  Main.Form1.CheckUpdate.Destroy;
+  Main.Form1.CheckUpdate:= Thread.Create(False);
+  Main.Form1.CheckUpdate.FreeOnTerminate:= True;
+  Main.Form1.CheckUpdate.Priority:= tpNormal;
+end;
 
 procedure TFormSettings.ButtonConfirmClick(Sender: TObject);
 begin
-  ini.WriteInteger('Update','RangeMSec',UpdateRangeSec);
+  ini.WriteInteger('Update','RangeMSec',UpdateRangeMSec);
+  ini.WriteInteger('Update','RangeSec',UpdateRangeSec);
   ButtonConfirm.Enabled:= False;
+end;
 
-
-
+procedure TFormSettings.ButtonExitClick(Sender: TObject);
+begin
+  FormSettings.Close;
 end;
 
 procedure TFormSettings.ButtonOkClick(Sender: TObject);
 begin
+  ini.WriteInteger('Update','RangeMSec',UpdateRangeMSec);
+  ini.WriteInteger('Update','RangeSec',UpdateRangeSec);
+  ButtonConfirm.Enabled:= False;
   FormSettings.Close;
 end;
 
@@ -55,7 +73,8 @@ begin
     EditUpdRange.Text:= IntToStr(0);
   end;
   if 1 < StrToInt(EditUpdRange.Text) then begin
-    UpdateRangeSec:= StrToInt(EditUpdRange.Text)*1000;
+    UpdateRangeSec:= StrToInt(EditUpdRange.Text);
+    UpdateRangeMSec:= StrToInt(EditUpdRange.Text)*1000;
   end;
   ButtonConfirm.Enabled:= True;
 end;
@@ -63,8 +82,8 @@ end;
 procedure TFormSettings.FormShow(Sender: TObject);
 begin
   ini:= TIniFile.Create(ExtractFilePath(Application.ExeName)+'settings.ini');
-  UpdateRangeMSec:= ini.ReadInteger('Update','Range',30000);
-  UpdateRangeSec:= ini.ReadInteger('Update','Range',30);
+  UpdateRangeMSec:= ini.ReadInteger('Update','RangeMSec',30000);
+  UpdateRangeSec:=  ini.ReadInteger('Update','RangeSec',30);
   EditUpdRange.Text:= IntToStr(UpdateRangeSec);
   ButtonConfirm.Enabled:= False;
 end;
