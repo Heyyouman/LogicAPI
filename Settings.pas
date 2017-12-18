@@ -38,6 +38,9 @@ procedure TFormSettings.ButtonConfirmClick(Sender: TObject);
 begin
   ini.WriteInteger('Update','RangeMSec',UpdateRangeSec);
   ButtonConfirm.Enabled:= False;
+
+
+
 end;
 
 procedure TFormSettings.ButtonOkClick(Sender: TObject);
