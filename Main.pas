@@ -16,7 +16,7 @@ type
     IdHTTP1: TIdHTTP;
     IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL;
     Output: TMemo;
-    StringGrid1: TStringGrid;
+    MainGrid: TStringGrid;
     ButtonSettings: TButton;
     procedure FormShow(Sender: TObject);
     procedure GetInfo;
@@ -26,19 +26,11 @@ type
     procedure FormResize(Sender: TObject);
   private
    // procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
+    SelfWidth: Integer;
+    SelfHeight: Integer;
   public
     CheckUpdate: TThread;
   end;
-
- { Thread = class(TThread)
-  private
-    { Private declarations }
-  {protected
-    procedure Execute; override;
-    procedure Upd;
-    procedure UpdInfo;
-    procedure ShowCaptions;
-  end;}
 
 var
   Form1: TForm1;
@@ -71,12 +63,14 @@ end;
 
 procedure TForm1.FormResize(Sender: TObject);
 begin
-  Form1.Width:=355;
-  Form1.Height:=548;
+  Form1.Width:=SelfWidth;
+  Form1.Height:=SelfHeight;
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
 begin
+  SelfWidth:= Self.Width;
+  SelfHeight:= Self.Height;
   //UpdateAmmount;
   ini:= TIniFile.Create(ExtractFilePath(Application.ExeName)+'settings.ini');
   UpdateRangeMSec:= ini.ReadInteger('Update','RangeMSec',30000);
@@ -122,18 +116,18 @@ end;
 procedure TForm1.SetGrid;
 var i: integer;
 begin
-  StringGrid1.ColCount:= 2;
-  StringGrid1.RowCount:= Length(users)+3;
-  StringGrid1.Cells[0,0]:= 'Никнейм';
-  StringGrid1.Cells[1,0]:= 'Количество голосов';
+  MainGrid.ColCount:= 2;
+  MainGrid.RowCount:= Length(users)+3;
+  MainGrid.Cells[0,0]:= 'Никнейм';
+  MainGrid.Cells[1,0]:= 'Количество голосов';
   for i:= 1 to Length(users) do begin
-    StringGrid1.Cells[0,i]:= users[i-1];
+    MainGrid.Cells[0,i]:= users[i-1];
   end;
   for i:= 1 to Length(ammount) do begin
-    StringGrid1.Cells[1,i]:= ammount[i-1];
+    MainGrid.Cells[1,i]:= ammount[i-1];
   end;
-  StringGrid1.Cells[0, Length(ammount)+2]:= 'Итого:';
-  StringGrid1.Cells[1, Length(ammount)+2]:= IntToStr(ammountSum);
+  MainGrid.Cells[0, Length(ammount)+2]:= 'Итого:';
+  MainGrid.Cells[1, Length(ammount)+2]:= IntToStr(ammountSum);
 end;
 
 

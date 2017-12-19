@@ -39,7 +39,7 @@ begin
 end;
 
 procedure Thread.Execute;
-var i: Integer;
+//var i: Integer;
 begin
   Synchronize(Update);
   Synchronize(Upd_ammount_old);

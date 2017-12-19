@@ -13,6 +13,7 @@ object FormSettings: TFormSettings
   Font.Style = []
   OldCreateOrder = False
   Position = poDesigned
+  OnResize = FormResize
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13

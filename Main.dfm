@@ -3879,7 +3879,7 @@ object Form1: TForm1
     TabOrder = 0
     Visible = False
   end
-  object StringGrid1: TStringGrid
+  object MainGrid: TStringGrid
     Left = 0
     Top = 23
     Width = 393
@@ -3902,6 +3902,9 @@ object Form1: TForm1
     ParentFont = False
     ScrollBars = ssVertical
     TabOrder = 1
+    ColWidths = (
+      172
+      172)
     RowHeights = (
       24
       24

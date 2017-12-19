@@ -21,8 +21,10 @@ type
     procedure FormShow(Sender: TObject);
     procedure ButtonExitClick(Sender: TObject);
     procedure ReloadUpdator;
+    procedure FormResize(Sender: TObject);
   private
-    { Private declarations }
+    SelfWidth: Integer;
+    SelfHeight: Integer;
   public
   end;
 
@@ -79,8 +81,18 @@ begin
   ButtonConfirm.Enabled:= True;
 end;
 
+procedure TFormSettings.FormResize(Sender: TObject);
+begin
+  Self.Width:= SelfWidth;
+  Self.Height:= SelfHeight;
+end;
+
 procedure TFormSettings.FormShow(Sender: TObject);
 begin
+  Self.Top:= Form1.Top + ( Form1.Width div 2 );
+  Self.Left:= Form1.Left;
+  SelfWidth:= Self.Width;
+  SelfHeight:= Self.Height;
   ini:= TIniFile.Create(ExtractFilePath(Application.ExeName)+'settings.ini');
   UpdateRangeMSec:= ini.ReadInteger('Update','RangeMSec',30000);
   UpdateRangeSec:=  ini.ReadInteger('Update','RangeSec',30);
