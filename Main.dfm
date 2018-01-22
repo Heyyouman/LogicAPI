@@ -3,8 +3,8 @@ object Form1: TForm1
   Top = 186
   BorderStyle = bsSingle
   Caption = 'LogicAPI'
-  ClientHeight = 519
-  ClientWidth = 349
+  ClientHeight = 559
+  ClientWidth = 373
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -3870,20 +3870,60 @@ object Form1: TForm1
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object ToolBar: TToolBar
+    Left = 0
+    Top = 0
+    Width = 373
+    Height = 22
+    ButtonHeight = 21
+    ButtonWidth = 61
+    Caption = 'ToolBar'
+    Color = clBtnFace
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    GradientDirection = gdHorizontal
+    ParentColor = False
+    ParentFont = False
+    ShowCaptions = True
+    TabOrder = 3
+    object SettingsButton: TToolButton
+      Left = 0
+      Top = 0
+      Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
+      ImageIndex = 0
+      OnClick = SettingsButtonClick
+    end
+    object UpadteButton: TToolButton
+      Left = 61
+      Top = 0
+      Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+      ImageIndex = 2
+    end
+    object AboutButton: TToolButton
+      Left = 122
+      Top = 0
+      Caption = 'About'
+      ImageIndex = 1
+      OnClick = AboutButtonClick
+    end
+  end
   object Output: TMemo
     Left = -48
     Top = 264
     Width = 721
     Height = 113
     ScrollBars = ssVertical
-    TabOrder = 0
+    TabOrder = 1
     Visible = False
   end
   object MainGrid: TStringGrid
     Left = 0
-    Top = 23
-    Width = 393
-    Height = 497
+    Top = 24
+    Width = 363
+    Height = 536
     BevelInner = bvNone
     BiDiMode = bdLeftToRight
     BorderStyle = bsNone
@@ -3894,14 +3934,14 @@ object Form1: TForm1
     FixedCols = 0
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -16
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Options = [goVertLine, goHorzLine]
     ParentBiDiMode = False
     ParentFont = False
     ScrollBars = ssVertical
-    TabOrder = 1
+    TabOrder = 2
     ColWidths = (
       172
       172)
@@ -3912,14 +3952,19 @@ object Form1: TForm1
       24
       24)
   end
-  object ButtonSettings: TButton
-    Left = 0
+  object DatePicker1: TDatePicker
+    Left = 215
     Top = 0
-    Width = 343
-    Height = 25
-    Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
-    TabOrder = 2
-    OnClick = ButtonSettingsClick
+    Height = 22
+    Date = 43101.000000000000000000
+    DateFormat = 'MM.yyyy'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    MinYear = 2015
+    TabOrder = 0
   end
   object IdHTTP1: TIdHTTP
     IOHandler = IdSSLIOHandlerSocketOpenSSL1

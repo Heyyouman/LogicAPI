@@ -6,7 +6,8 @@ uses
   MyThread in 'MyThread.pas',
   Settings in 'Settings.pas' {FormSettings},
   Vcl.Themes,
-  Vcl.Styles;
+  Vcl.Styles,
+  ABOUT in 'ABOUT.pas' {AboutBox};
 
 {$R *.res}
 
@@ -16,5 +17,6 @@ begin
   TStyleManager.TrySetStyle('Windows10');
   Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TFormSettings, FormSettings);
+  Application.CreateForm(TAboutBox, AboutBox);
   Application.Run;
 end.

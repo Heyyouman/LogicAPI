@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, IdIOHandler,
   IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, System.JSON, Vcl.ExtCtrls,
-  Vcl.Buttons, Vcl.Grids, MMSystem, MyThread, Settings, inifiles;
+  Vcl.Buttons, Vcl.Grids, MMSystem, MyThread, Settings, inifiles, Vcl.ComCtrls,
+  Vcl.WinXPickers, Vcl.ToolWin, About;
 
 //const  WM_AFTER_SHOW = WM_USER + 301;
 
@@ -17,13 +18,18 @@ type
     IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL;
     Output: TMemo;
     MainGrid: TStringGrid;
-    ButtonSettings: TButton;
+    DatePicker1: TDatePicker;
+    ToolBar: TToolBar;
+    SettingsButton: TToolButton;
+    AboutButton: TToolButton;
+    UpadteButton: TToolButton;
     procedure FormShow(Sender: TObject);
     procedure GetInfo;
     procedure SetGrid;
     procedure UpdateAmmount;
-    procedure ButtonSettingsClick(Sender: TObject);
     procedure FormResize(Sender: TObject);
+    procedure SettingsButtonClick(Sender: TObject);
+    procedure AboutButtonClick(Sender: TObject);
   private
    // procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     SelfWidth: Integer;
@@ -34,7 +40,7 @@ type
 
 var
   Form1: TForm1;
-  date: string;
+  CurrnetDate: string;
   year: string;
   mounth: string;
   users: array of string;
@@ -49,16 +55,20 @@ implementation
 
 {$R *.dfm}
 
-
 procedure TForm1.UpdateAmmount;
 begin
   GetInfo;
   SetGrid;
 end;
 
-procedure TForm1.ButtonSettingsClick(Sender: TObject);
+procedure TForm1.SettingsButtonClick(Sender: TObject);
 begin
-  FormSettings.ShowModal;
+   FormSettings.ShowModal;
+end;
+
+procedure TForm1.AboutButtonClick(Sender: TObject);
+begin
+  About.AboutBox.ShowModal;
 end;
 
 procedure TForm1.FormResize(Sender: TObject);
@@ -71,6 +81,8 @@ procedure TForm1.FormShow(Sender: TObject);
 begin
   SelfWidth:= Self.Width;
   SelfHeight:= Self.Height;
+  // CurrnetDate:= FormatDateTime('mm.yyyy',Now);
+  CurrnetDate:= FormatDateTime('mm.yyyy',Now);
   //UpdateAmmount;
   ini:= TIniFile.Create(ExtractFilePath(Application.ExeName)+'settings.ini');
   UpdateRangeMSec:= ini.ReadInteger('Update','RangeMSec',30000);
@@ -86,8 +98,8 @@ var
  // JSONobj: TJSONObject;
   JSONValue: TJSONValue;
 begin
-  date:= FormatDateTime('mm.yyyy',Now);
-  str:= IdHTTP1.Get('https://logicworld.ru/launcher/tableTopVote.php?mode=api&date='+ date);
+  CurrnetDate:= FormatDateTime('mm.yyyy',Now);
+  str:= IdHTTP1.Get('https://logicworld.ru/launcher/tableTopVote.php?mode=api&date='+ CurrnetDate);
   //Delete(str,1,62);    Fixed by Yaroslavik
   str:= '{"items": '+ str +'}';
   //Output.Text:= str;
