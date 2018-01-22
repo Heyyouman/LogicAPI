@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 530
   Top = 186
   BorderStyle = bsSingle
-  Caption = 'LogicAPI'
-  ClientHeight = 559
+  Caption = 'LogicWorld votes counter'
+  ClientHeight = 561
   ClientWidth = 373
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -3901,6 +3901,7 @@ object Form1: TForm1
       Top = 0
       Caption = #1054#1073#1085#1086#1074#1080#1090#1100
       ImageIndex = 2
+      OnClick = UpadteButtonClick
     end
     object AboutButton: TToolButton
       Left = 122
@@ -3963,8 +3964,9 @@ object Form1: TForm1
     Font.Height = -16
     Font.Name = 'Segoe UI'
     Font.Style = []
-    MinYear = 2015
+    MinYear = 2017
     TabOrder = 0
+    OnChange = DatePicker1Change
   end
   object IdHTTP1: TIdHTTP
     IOHandler = IdSSLIOHandlerSocketOpenSSL1

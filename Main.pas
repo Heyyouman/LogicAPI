@@ -24,12 +24,14 @@ type
     AboutButton: TToolButton;
     UpadteButton: TToolButton;
     procedure FormShow(Sender: TObject);
-    procedure GetInfo;
+    function GetInfo(date:string):string;
     procedure SetGrid;
     procedure UpdateAmmount;
     procedure FormResize(Sender: TObject);
     procedure SettingsButtonClick(Sender: TObject);
     procedure AboutButtonClick(Sender: TObject);
+    procedure DatePicker1Change(Sender: TObject);
+    procedure UpadteButtonClick(Sender: TObject);
   private
    // procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     SelfWidth: Integer;
@@ -55,9 +57,15 @@ implementation
 
 {$R *.dfm}
 
+procedure TForm1.UpadteButtonClick(Sender: TObject);
+begin
+  GetInfo(CurrnetDate);
+  SetGrid;
+end;
+
 procedure TForm1.UpdateAmmount;
 begin
-  GetInfo;
+  GetInfo(CurrnetDate);
   SetGrid;
 end;
 
@@ -71,6 +79,13 @@ begin
   About.AboutBox.ShowModal;
 end;
 
+procedure TForm1.DatePicker1Change(Sender: TObject);
+begin
+  CurrnetDate:= FormatDateTime('mm.yyyy',DatePicker1.Date);
+  GetInfo(CurrnetDate);
+  SetGrid;
+end;
+
 procedure TForm1.FormResize(Sender: TObject);
 begin
   Form1.Width:=SelfWidth;
@@ -81,7 +96,6 @@ procedure TForm1.FormShow(Sender: TObject);
 begin
   SelfWidth:= Self.Width;
   SelfHeight:= Self.Height;
-  // CurrnetDate:= FormatDateTime('mm.yyyy',Now);
   CurrnetDate:= FormatDateTime('mm.yyyy',Now);
   //UpdateAmmount;
   ini:= TIniFile.Create(ExtractFilePath(Application.ExeName)+'settings.ini');
@@ -91,18 +105,17 @@ begin
   CheckUpdate.Priority:= tpNormal;
 end;
 
-procedure TForm1.GetInfo;
+function TForm1.GetInfo;
 var
   i: integer;
   str: WideString;
  // JSONobj: TJSONObject;
   JSONValue: TJSONValue;
 begin
-  CurrnetDate:= FormatDateTime('mm.yyyy',Now);
   str:= IdHTTP1.Get('https://logicworld.ru/launcher/tableTopVote.php?mode=api&date='+ CurrnetDate);
   //Delete(str,1,62);    Fixed by Yaroslavik
   str:= '{"items": '+ str +'}';
-  //Output.Text:= str;
+  //Output.Text:= str;   Debug
   JSONValue:=TJSONObject.ParseJSONValue(str);
   JSONValue:=(JSONValue as TJSONObject).Get('items').JsonValue;
   ammount:= nil;
@@ -116,7 +129,7 @@ begin
         SetLength(ammount, lenght+1);
         users[i]:= ((JSONValue as TJSONArray).Items[i] as TJSONObject).Get('user').JSONValue.Value ;
         ammount[i]:= ((JSONValue as TJSONArray).Items[i] as TJSONObject).Get('ammount').JSONValue.Value ;
-      //Output.Lines.Add(users[i] +'   '+ ammount[i]);
+      //Output.Lines.Add(users[i] +'   '+ ammount[i]);   Debug
      end;
   ammountSum:= 0;
   for i:= Low(ammount) to High(ammount) do
@@ -128,6 +141,10 @@ end;
 procedure TForm1.SetGrid;
 var i: integer;
 begin
+  for i:= 1 to MainGrid.RowCount do begin    //  Очистка таблицы
+    MainGrid.Cells[0,i]:= '';                //
+    MainGrid.Cells[1,i]:= '';                //
+  end;                                       //
   MainGrid.ColCount:= 2;
   MainGrid.RowCount:= Length(users)+3;
   MainGrid.Cells[0,0]:= 'Никнейм';

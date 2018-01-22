@@ -34,7 +34,7 @@ end;
 
 procedure Thread.Update;
 begin
-  Form1.GetInfo;
+  Form1.GetInfo(Main.CurrnetDate);
   Form1.SetGrid;
 end;
 
