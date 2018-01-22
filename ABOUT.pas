@@ -11,6 +11,8 @@ type
     ProgramIcon: TImage;
     ProductName: TLabel;
     OKButton: TButton;
+    Version: TLabel;
+    Developer: TLabel;
     procedure OKButtonClick(Sender: TObject);
   private
     { Private declarations }

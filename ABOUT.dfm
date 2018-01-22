@@ -25,9 +25,9 @@ object AboutBox: TAboutBox
     ParentColor = True
     TabOrder = 0
     object ProgramIcon: TImage
-      Left = 111
-      Top = 16
-      Width = 42
+      Left = 121
+      Top = 40
+      Width = 32
       Height = 33
       Center = True
       Picture.Data = {
@@ -4424,6 +4424,20 @@ object AboutBox: TAboutBox
       Height = 13
       Caption = 'RealWorld votes checker'
       IsControl = True
+    end
+    object Version: TLabel
+      Left = 121
+      Top = 115
+      Width = 21
+      Height = 13
+      Caption = 'v0.8'
+    end
+    object Developer: TLabel
+      Left = 103
+      Top = 134
+      Width = 70
+      Height = 13
+      Caption = 'by Heyyouman'
     end
   end
   object OKButton: TButton
