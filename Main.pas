@@ -97,6 +97,7 @@ begin
   SelfWidth:= Self.Width;
   SelfHeight:= Self.Height;
   CurrnetDate:= FormatDateTime('mm.yyyy',Now);
+  DatePicker1.Date:= StrToDate(FormatDateTime('dd.mm.yyyy',Now));
   //UpdateAmmount;
   ini:= TIniFile.Create(ExtractFilePath(Application.ExeName)+'settings.ini');
   UpdateRangeMSec:= ini.ReadInteger('Update','RangeMSec',30000);

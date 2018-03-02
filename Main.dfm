@@ -3957,7 +3957,7 @@ object Form1: TForm1
     Left = 215
     Top = 0
     Height = 22
-    Date = 43101.000000000000000000
+    Date = 43103.045959826390000000
     DateFormat = 'MM.yyyy'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -3979,8 +3979,11 @@ object Form1: TForm1
     Request.ContentRangeStart = -1
     Request.ContentRangeInstanceLength = -1
     Request.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-    Request.BasicAuthentication = False
-    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.AcceptCharSet = 'ISO-8859-1,utf-8;q=0.7,*;q=0.7'
+    Request.BasicAuthentication = True
+    Request.UserAgent = 
+      'Mozilla/5.0 (Windows; U; Windows NT 6.1; es-ES; rv:1.9.2.10) Gec' +
+      'ko/2'
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
